@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+# Copyright (c) 2017 Patrick Yevsukov. All Rights Reserved.
+#
+# Use of this source code is governed by the OSI license in the LICENSE file.
+#
+
+set -e
+
+if [ -z "${VIRTUAL_ENV}" ]
+then
+    echo "Please activate a virtual environment."
+    echo ""
+    echo "    $ . ./venv/bin/activate"
+    echo ""
+    exit 1
+fi
+
+if [ -z "${TWILIO_AUTH_TOKEN}" ]
+then
+    echo "Please ensure the TWILIO_AUTH_TOKEN is set."
+    echo ""
+    echo "    $ export TWILIO_AUTH_TOKEN=XXXX"
+    echo ""
+    exit 1
+fi
+
+if [ ! -e "setup.py" ]
+then
+    echo "Please invoke from the module's root directory."
+    echo ""
+    echo "    $ ./tools/serve -c examples/config.ini"
+    echo ""
+    exit 1
+fi
+
+while [[ $# -gt 1 ]]
+do
+    case "$1" in
+        -c|--config)
+            config_path="$2"
+            shift
+            ;;
+        *)
+            echo "Unrecognized arguments were passed."
+            exit 1
+            ;;
+    esac
+done
+
+if [ -z "${config_path}" ]
+then
+    echo "Please specify the path to your config file."
+    echo ""
+    echo "    $ ./tools/serve -c examples/config.ini"
+    echo ""
+    exit 1
+fi
+
+pserve --reload "${config_path}"

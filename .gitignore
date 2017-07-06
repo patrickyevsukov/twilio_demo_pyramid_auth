@@ -1,0 +1,11 @@
+*.py[cod]
+*.so
+build/
+dist/
+eggs/
+.eggs/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
