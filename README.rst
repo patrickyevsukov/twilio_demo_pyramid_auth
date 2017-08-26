@@ -14,7 +14,13 @@ Usage:
 
 .. code-block:: shell
 
-    $ virtualenv venv
+    $ cd /tmp
+    $ curl -LOk https://github.com/patrickyevsukov/twilio_demo_pyramid_auth/archive/master.zip
+    $ unzip master.zip
+    $ mv twilio_demo_pyramid_auth* twilio_demo_pyramid_auth
+    $ cd twilio_demo_pyramid_auth
+    $ pip install virtualenv
+    $ virtualenv --clear venv
     $ . ./venv/bin/activate
     $ pip install -e .
     $ export TWILIO_AUTH_TOKEN=XXXX
